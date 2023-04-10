@@ -1,0 +1,37 @@
+{
+    "interfaces": [
+        {
+            "name": "eth0",
+            "type": "eth",
+            "pin": 5
+        },
+        {
+            "name": "wifi_sta",
+            "type": "wifi_sta",
+            "networks": [
+                {
+                    "ssid": "my_wifi_network_1",
+                    "password": "my_wifi_password_1"
+                },
+                {
+                    "ssid": "my_wifi_network_2",
+                    "password": "my_wifi_password_2"
+                }
+            ]
+        },
+        {
+            "name": "wifi_ap",
+            "type": "wifi_ap",
+            "ssid": "my_ap_network",
+            "password": "my_ap_password"
+        },
+        {
+            "name": "ppp0",
+            "type": "pppos",
+            "uart": 1,
+            "apn": "my_apn",
+            "user": "my_user",
+            "password": "my_password"
+        }
+    ]
+}

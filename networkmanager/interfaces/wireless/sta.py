@@ -7,8 +7,8 @@ class STA(Wireless):
         self._interface = WLAN(STA_IF)
 
 
-    def _connect(self):
-        self._interface.connect()
+    def _connect(self, *args, **kargs):
+        self._interface.connect(*args, **kargs)
 
 
     def _disconnect(self):

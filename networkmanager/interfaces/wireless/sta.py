@@ -27,5 +27,4 @@ class STA(Wireless):
         _interface.config(reconnects=value)
 
 
-NetworkManager.register_interface(STA)
-NetworkManager.create_interface('wlanSTA', STA)
+NetworkManager.register_interface('wlanSTA', STA)

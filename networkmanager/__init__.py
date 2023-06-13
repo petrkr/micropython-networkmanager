@@ -5,7 +5,7 @@ __license__ = "MIT"
 
 class NetworkManager:
     _instance = None
-    _interface_types = list()
+    _interface_types = dict()
     _interfaces = dict()
 
 
@@ -26,18 +26,26 @@ class NetworkManager:
 
 
     @classmethod
-    def register_interface(cls, interface):
-        cls._interface_types.append(interface)
+    def register_interface(cls, iftype, interface):
+        if iftype in cls._interface_types:
+            raise ValueError("Interface type {} already exists".format(iftype))
+
+        cls._interface_types[iftype] = interface
 
 
-    @classmethod
-    def create_interface(cls, name, interface):
-        cls._interfaces[name] = interface()
+    def create_interface(self, iftype, ifname):
+        if ifname in self._interfaces:
+            raise ValueError("Interface {} already exists".format(ifname))
+
+        if iftype not in self._interface_types:
+            raise ValueError("Interface type {} does not exists, did you imported it?".format(iftype))
+
+        self._interfaces[ifname] = self._interface_types[iftype]()
 
 
     # TODO: Really do it like that?
     @property
-    def available_interfaces(self):
+    def interface_types(self):
         return self._interface_types
 
 

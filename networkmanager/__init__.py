@@ -33,14 +33,14 @@ class NetworkManager:
         cls._interface_types[iftype] = interface
 
 
-    def create_interface(self, iftype, ifname):
+    def create_interface(self, iftype, ifname, *args, **kargs):
         if ifname in self._interfaces:
             raise ValueError("Interface {} already exists".format(ifname))
 
         if iftype not in self._interface_types:
             raise ValueError("Interface type {} does not exists, did you imported it?".format(iftype))
 
-        self._interfaces[ifname] = self._interface_types[iftype]()
+        self._interfaces[ifname] = self._interface_types[iftype](*args, **kargs)
 
 
     def delete_interface(self, ifname):

@@ -22,7 +22,7 @@ class ScanResult():
         return self._securities[security] if security in self._securities else "Unknown ({})".format(security)
 
 
-    def __repl__(self):
+    def __repr__(self):
         return self.__str__()
 
 

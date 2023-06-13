@@ -28,3 +28,4 @@ class STA(Wireless):
 
 
 NetworkManager.register_interface(STA)
+NetworkManager.create_interface('wlanSTA', STA)

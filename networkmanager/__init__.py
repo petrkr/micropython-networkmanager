@@ -4,26 +4,46 @@ __version__ = "0.0.1"
 __license__ = "MIT"
 
 class NetworkManager:
-    _interfaceTypes = list()
+    _instance = None
+    _interface_types = list()
+    _interfaces = dict()
 
-    def __init__(self):
+
+    def __new__(cls):
+        if cls._instance:
+            return cls._instance
+
+        # New singleton instance
+        cls._instance = super(NetworkManager, cls).__new__(cls)
+
         # Event list
-        self._ev_connecting = []
-        self._ev_connected = []
-        self._ev_disconnected = []
-        self._ev_timeout = []
+        cls._ev_connecting = []
+        cls._ev_connected = []
+        cls._ev_disconnected = []
+        cls._ev_timeout = []
 
-        self._interfaces = list()
-
-        # Create instance of known interfaces
-        # TODO: Maybe create only active ones to save memory?
-        for i in self._interfaceTypes:
-            self._interfaces.append(i())
+        return cls._instance
 
 
     @classmethod
     def register_interface(cls, interface):
-        cls._interfaceTypes.append(interface)
+        cls._interface_types.append(interface)
+
+
+    @classmethod
+    def create_interface(cls, name, interface):
+        cls._interfaces[name] = interface()
+
+
+    # TODO: Really do it like that?
+    @property
+    def available_interfaces(self):
+        return self._interface_types
+
+
+    @property
+    def interfaces(self):
+        return self._interfaces
 
 
     def _connect(self):
@@ -64,14 +84,6 @@ class NetworkManager:
 
     def event_add_timeout(self, func):
         self._ev_timeout.append(func)
-
-
-    def available_interfaces(self):
-        return self._interfaceTypes
-
-
-    def interfaces(self):
-        return self._interfaces
 
 
     # Main loop - or create internal thread instead?

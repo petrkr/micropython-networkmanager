@@ -56,4 +56,6 @@ class AP(Wireless):
     def key(self, value):
         self._interface.config(key = value)
 
+
 NetworkManager.register_interface(AP)
+NetworkManager.create_interface('wlanAP', AP)

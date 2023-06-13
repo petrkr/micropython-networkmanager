@@ -43,15 +43,28 @@ class NetworkManager:
         self._interfaces[ifname] = self._interface_types[iftype]()
 
 
+    def delete_interface(self, ifname):
+        if ifname not in self._interfaces:
+            raise ValueError("Interface {} does not exists".format(ifname))
+
+        # TODO: some free / deregister? Like disconnect etc?
+        del self._interfaces[ifname]
+
+
     # TODO: Really do it like that?
     @property
     def interface_types(self):
         return self._interface_types
 
 
-    @property
-    def interfaces(self):
-        return self._interfaces
+    def interface(self, ifname=None):
+        if ifname is None:
+            return self._interfaces
+
+        if ifname not in self._interfaces:
+            raise ValueError("Interface {} does not exists".format(ifname))
+
+        return self._interfaces[ifname]
 
 
     def _connect(self):

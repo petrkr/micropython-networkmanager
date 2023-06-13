@@ -14,6 +14,14 @@ class Interface():
         raise NotImplementedError()
 
 
+    def _load_config(self, data):
+        pass
+
+
+    def _save_config(self):
+        pass
+
+
     @property
     def isconnected(self):
         return self._interface.isconnected()

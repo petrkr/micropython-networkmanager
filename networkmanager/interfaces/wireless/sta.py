@@ -7,6 +7,14 @@ class STA(Wireless):
         self._interface = WLAN(STA_IF)
 
 
+    def _connect(self):
+        self._interface.connect()
+
+
+    def _disconnect(self):
+        self._interface.disconnect()
+
+
     @property
     def channel(self):
         return self._interface.config('channel')

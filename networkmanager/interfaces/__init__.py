@@ -6,17 +6,25 @@ class Interface():
         self._ev_disconnected = []
 
 
+    def _connect(self):
+        raise NotImplementedError()
+
+
+    def _disconnect(self):
+        raise NotImplementedError()
+
+
     @property
     def isconnected(self):
         return self._interface.isconnected()
 
 
-    def connect(self):
-        raise NotImplementedError()
+    def connect(self, *args, **kargs):
+        self._connect(*args, **kargs)
 
 
     def disconnect(self):
-        raise NotImplementedError()
+        self._disconnect()
 
 
     def ifconfig(self):

@@ -109,4 +109,6 @@ class NetworkManager:
 
     # Main loop - or create internal thread instead?
     def loop(self):
-        pass
+        # Run loop on interfaces
+        for k, v in self._interfaces:
+            v.loop()

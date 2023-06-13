@@ -19,3 +19,8 @@ class Interface():
 
     def ifconfig(self):
         return self._interface.ifconfig()
+
+
+    # If interface need, do some loop stuff in this method
+    def loop(self):
+        pass

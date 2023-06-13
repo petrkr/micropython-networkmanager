@@ -1,7 +1,9 @@
 
 class Interface():
     def __init__(self):
-        pass
+        self._ev_connecting = []
+        self._ev_connected = []
+        self._ev_disconnected = []
 
 
     @property

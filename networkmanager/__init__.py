@@ -40,7 +40,8 @@ class NetworkManager:
         if iftype not in self._interface_types:
             raise ValueError("Interface type {} does not exists, did you imported it?".format(iftype))
 
-        self._interfaces[ifname] = self._interface_types[iftype](*args, **kargs)
+        iface = self._interface_types[iftype](*args, **kargs)
+        self._interfaces[ifname] = iface
 
 
     def delete_interface(self, ifname):

@@ -21,13 +21,13 @@ class STA(Wireless):
 
 
     @property
-    def ssid(self):
-        return self._interface.config('ssid')
+    def reconnects(self):
+        return self._interface.config('reconnects')
 
 
     @property
-    def reconnects(self):
-        return self._interface.config('reconnects')
+    def rssi(self):
+        return self._interface.status('rssi')
 
 
     @reconnects.setter
